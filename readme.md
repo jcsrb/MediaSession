@@ -1,9 +1,9 @@
 # AudioSession
 
-we all have been there, you are listening to a podcast on a website and by mistake closed the tab. You can resurrect the tab, but if you didn't pay close attention to the timer, finding the right place again can be tricky. _AudioSession_ is here to fix just that!
+we all have been there: you are listening to a podcast on a website and you accidentally close the tab. You can reopen the tab, but if you didn't pay close attention to the timer, finding the right place again can be tricky. __AudioSession__ is here to fix just that!
 
 ## What is it?
-AudioSession is an extension of the [HTMLAudioElement][HAEdoc] prototype that keeps track of __&lt;audio&gt;__  `currentTime` saves it to __localStorage__ to be able to retrieve it on the next play, regardless of page reload. 
+AudioSession is an extension of the [HTMLAudioElement][HAEdoc] prototype that keeps track of __&lt;audio&gt;__  `currentTime` and saves it to __localStorage__ to be able to retrieve it on the next play, regardless of page reload. 
 Works great with `autoplay` and has no issues with `loop`
 
 
@@ -21,7 +21,7 @@ add `save-session` to your `<audio>` element like this:
 </audio>
 ```
 
-### Javascript activation
+### JavaScript activation
 
 ```javascript
   var myAudioElement = document.getElementsByTagName("audio")[0]; // get your audio element
@@ -29,9 +29,9 @@ add `save-session` to your `<audio>` element like this:
   myAudioElement.saveSession = false; // deactivate AudioSession
 ```
 ### Custom Events
-for better integration in your project, AudioSession provides a set of custom events triggered at various points during the points:
+for better integration in your project, AudioSession provides a set of custom events triggered at various points:
 
-* `sessionStored` is fired when the current position has been stored been stored (fires often)
+* `sessionStored` is fired when the current position has been stored (fires often)
 * `sessionRestored` is fired when the stored position has been applied to the audio element
 * `sessionCleared` is fired when the the session key has been removed from storage
 * `sessionSaveActivated` is fired when AudioSession has been activated
@@ -43,7 +43,7 @@ for better integration in your project, AudioSession provides a set of custom ev
 The Session Key is build from the source URL of the file, this has the side effect that if you have the same audio file on multiple sub-pages it continues from where it left of.
 
 It's either a bug or a feature depends on how you see it.
-You can use this side effect to keep music continuing when going to the next page.
+You can use this side effect to keep music continuing, when going to the next page.
 If you don't want this to happen, use a unique ID for each &lt;audio&gt; element, and a include it in the _sessionKey_.
 
 ## Browser Support
