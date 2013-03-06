@@ -107,8 +107,7 @@
     };
 
     var audioElements = document.getElementsByTagName("audio"),
-      audioElementsCount = audioElements.length,
-      audioElement;
+      audioElementsCount = audioElements.length;
     while (audioElementsCount > 0) {
       audioElementsCount -= 1;
       audioElements[audioElementsCount].initSaveSession();
