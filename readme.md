@@ -4,7 +4,7 @@ we all have been there: you are listening to a podcast on a website and you acci
 
 ## What is it?
 AudioSession is an extension of the [HTMLAudioElement][HAEdoc] prototype that keeps track of __&lt;audio&gt;__  `currentTime` and saves it to __localStorage__ to be able to retrieve it on the next play, regardless of page reload. 
-Works <del>great with `autoplay`</del> [`autoplay` doesn't work crossbrowser and is under investigation #2 ] and has no issues with `loop`
+Works <del>great with autoplay</del> [`autoplay` doesn't work crossbrowser and is under investigation [#2](https://github.com/jcsrb/AudioSession/issues/2)]  and has no issues with `loop`
 
 
 ## Usage
