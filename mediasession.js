@@ -6,14 +6,14 @@
 if (window.HTMLMediaElement && window.localStorage) {
   var MediaSession = (function () {
     "use strict";
-    function MediaSession(mediaElement) {      
+    function MediaSession(mediaElement) {
 
       this.attachElement = function (mediaElement) {
         this.mediaElement = mediaElement;
         this.mediaElement.session = this;
         this.sessionKey = name + "-" + this.mediaElement.currentSrc;
         this.addEventHandlers();
-      },
+      };
 
       /* store the current location */
       this.store = function () {
@@ -45,14 +45,14 @@ if (window.HTMLMediaElement && window.localStorage) {
       };
 
 
-      // if attachElement if mediaElement is available from the constructor
+      //attachElement if mediaElement is available from the constructor
       if (!!mediaElement) {
         this.attachElement(mediaElement);
       }
     }
 
 
-    MediaSession.prototype = {          
+    MediaSession.prototype = {
       /*Callbacks*/
       onStore : function () {}, /*noop*/
       onRetrieve : function () {}, /*noop*/
