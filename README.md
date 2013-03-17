@@ -4,7 +4,7 @@
 MediaSession saves the time-location of MediaElements (&lt;audio&gt; & &lt;video&gt;) and gives you the ability to restore it.
 
 ## Browser Support
-MediaSession relies on **HTMLMediaElement** ([like Audio][canIuseAudio]) and [*localStorage*][canIuseStorage], only browsers that implement these specs are supported.
+MediaSession relies on **HTMLMediaElement** ([like Audio][canIuseAudio]) and [localStorage][canIuseStorage], only browsers that implement these specs are supported.
 
 [![browser support](http://ci.testling.com/jcsrb/mocha-testling-ci-example.png)](http://ci.testling.com/jcsrb/mocha-testling-ci-example)
 
@@ -33,14 +33,14 @@ for automatic restore also add `autorestore` to your `<audio>` element like this
 ### with JavaScript
 
 ```javascript
-  var myAudioElement = document.getElementsByTagName("audio")[0]; // get your audio element
-  new MediaSession(me); // create a new MediaSession and pass the element to the constructor
+var myAudioElement = document.getElementsByTagName("audio")[0]; // get your audio element
+new MediaSession(me); // create a new MediaSession and pass the element to the constructor
 ```
 after initialization you can 
 
 ```javascript
-	myAudioElement.session.restore(); // move to last saved position
-	myAudioElement.session.end(); // disable and remove the media session
+myAudioElement.session.restore(); // move to last saved position
+myAudioElement.session.end(); // disable and remove the media session
 ```
 
 
@@ -54,20 +54,19 @@ for better integration in your project, MediaSession provides a set of callbacks
 * `onEnd` is fired when the the session key has been removed from storage
 
 ```javascript
-  var myAudioElement = document.getElementsByTagName("audio")[0]; // get your audio element  
-  myAudioElement.session.onStore : function () { /* my callback */ }; 
-  myAudioElement.session.onRestore : function () { /* my callback */ }; 
-  myAudioElement.session.onClear : function () { /* my callback */ }; 
+var myAudioElement = document.getElementsByTagName("audio")[0]; // get your audio element  
+myAudioElement.session.onStore : function () { /* my callback */ }; 
+myAudioElement.session.onRestore : function () { /* my callback */ }; 
+myAudioElement.session.onClear : function () { /* my callback */ }; 
+myAudioElement.session.onEnd : function () { /* my callback */ }; 
 ```
 ## Limitations
 
 ### HTML5 Validation
-as described in the [Usage Section](#usage), MediaSession implicit activation relies on custom element attributes  (`session` and `autorestore`) and validators don't like that.
-
-If you insist on spotless validation, rename all instances to  the `data-` equivalent
+as described in the [Usage Section](#usage), MediaSession implicit activation relies on custom element attributes  (`session` and `autorestore`) and validators don't like that. If you insist on spotless validation, rename all instances to  the `data-` equivalent.
 
 ### Storage Key
-The default Storage Key is build from the source URL of the file, this has the side effect that if you have the same audio file on multiple sub-pages it continues from where it left of.
+The default Storage Key is build from the source URL of the file, this has the side effect that if you have the same media file on multiple sub-pages it continues from where it left of.
 
 
 ## Testing
@@ -79,7 +78,7 @@ Remote testing is done using [Testling-CI][testling], see an example on how to d
 ## Further Plans
 * Integrate with popular media polyfills
 * Bookmarklet
-*
+* Nice Demo and GH-Page
 
 ## Thanks to
 * [Upfront Podcast][upfront] for the demo audio files
