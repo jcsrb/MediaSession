@@ -9,31 +9,33 @@ if (window.HTMLMediaElement && window.localStorage) {
     function MediaSession(mediaElement) {
 
       this.attachElement = function (mediaElement) {
-        this.mediaElement = mediaElement;
-        this.mediaElement.session = this;
-        this.sessionKey = name + "-" + this.mediaElement.currentSrc;
-        this.addEventHandlers();
+        this.mediaElement = mediaElement; // build reference
+        this.mediaElement.session = this; // build reverse reference
+        this.sessionKey = name + "-" + this.mediaElement.currentSrc; // build sessionKey 
+        this.addEventHandlers(); // attach handelers
       };
 
       /* store the current location */
       this.store = function () {
-        this.session.onStore();
+        this.session.onStore(); // execute callback
       };
 
       /* restore the stored location */
       this.restore = function () {
-        this.session.onRestore();
+        this.session.onRestore(); // execute callback
       };
 
       /* clear the stored location */
       this.clear = function () {
-        this.session.onClear();
+        this.session.onClear(); // execute callback
       };
 
       /* end session */
       this.end = function () {
-        this.session.clear();
-        this.session.onEnd();
+        this.session.removeEventHandlers(); // remove handlers
+        this.session.clear(); // clear session
+        this.session = undefined; // remove referece and let GC do it's thing
+        this.session.onEnd(); // execute callback
       };
 
       this.addEventHandlers = function () {
