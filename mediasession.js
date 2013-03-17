@@ -17,7 +17,7 @@ if (window.HTMLMediaElement && window.localStorage) {
 
       /* store the current location */
       this.store = function () {
-        this.session.onStore();         
+        this.session.onStore();
       };
 
       /* restore the stored location */
@@ -30,18 +30,24 @@ if (window.HTMLMediaElement && window.localStorage) {
         this.session.onClear();
       };
 
+      /* end session */
+      this.end = function () {
+        this.session.clear();
+        this.session.onEnd();
+      };
+
       this.addEventHandlers = function () {
-        this.mediaElement.addEventListener('canplay', this.restore);
+        if (this.mediaElement.hasAttribute("autorestore")) {
+          this.mediaElement.addEventListener('canplay', this.restore);
+        }
         this.mediaElement.addEventListener('timeupdate', this.store);
-        this.mediaElement.addEventListener('seeked', this.store);
-        this.mediaElement.addEventListener('ended', this.clear);
+        this.mediaElement.addEventListener('ended', this.end);
       };
 
       this.removeEventHandlers = function () {
         this.mediaElement.removeEventListener('canplay', this.restore);
-        this.mediaElement.removeEventListener('timeupdate', this.storeSession);
-        this.mediaElement.removeEventListener('seeked', this.storeSession);
-        this.mediaElement.removeEventListener('ended', this.clearSession);
+        this.mediaElement.removeEventListener('timeupdate', this.store);
+        this.mediaElement.removeEventListener('ended', this.end);
       };
 
 
@@ -56,7 +62,8 @@ if (window.HTMLMediaElement && window.localStorage) {
       /*Callbacks*/
       onStore : function () {}, /*noop*/
       onRestore : function () {}, /*noop*/
-      onClear : function () {} /*noop*/
+      onClear : function () {}, /*noop*/
+      onEnd : function () {} /*noop*/
     };
     // expose it to the world
     return MediaSession;
