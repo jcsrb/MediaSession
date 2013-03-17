@@ -18,7 +18,7 @@ function createMedia(wrapperId, elementTagName, sources){
 
   var structure = DOM.init(
     DOM.el('div#'+wrapperId).content(
-      DOM.el(elementTagName).content.apply(null,sourcesNodes)
+      DOM.el(elementTagName).content.apply(DOM,sourcesNodes)
     )              
   );
 
@@ -27,7 +27,7 @@ function createMedia(wrapperId, elementTagName, sources){
   mediaElement.setAttribute("session", '');
 
   var sourceElements = structure.querySelectorAll("source");
-  mapSources(sourceElements,sources);
+  mapSources(sources,sourceElements);
 
   console.log(mediaElement);
   return structure; 
@@ -36,7 +36,7 @@ function createMedia(wrapperId, elementTagName, sources){
 function mapSources(sources, sourceElements){  
   var count = sourceElements.length;  
   while (count > 0) {
-      count -= 1;                      
+      count -= 1;                            
       sourceElements[count].setAttribute("src", sources[count].src);
       sourceElements[count].setAttribute("type", sources[count].mine);      
   }
