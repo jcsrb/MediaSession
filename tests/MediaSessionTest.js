@@ -3,7 +3,7 @@ var expect = chai.expect;
 
 describe('MediaSession', function () { 
   
-  it('should be defined', function () {
+  it('should exist', function () {
     MediaSession.should.be.ok;
   });      
   it("should have the name 'MediaSession'", function() {          
@@ -44,19 +44,15 @@ describe('MediaSession', function () {
 
     });
     it('should have a sessionKey', function(){
-      var me = document.createElement("audio");          
-      var ms = new window.MediaSession(me);                
+      var me = document.createElement("audio");        
+      me.setAttribute("src" , demoAudioSrc[0].src);      
+      document.body.appendChild(me);
+      var ms = new window.MediaSession(me);               
       //ms.sessionKey.should.be.
     });
   });
 });
 
-
-
-
-function createAudioElement(singleSource){
-
-}
 
 describe('DOM Interaction', function () {
   describe('Audio', function () {    
@@ -77,3 +73,17 @@ describe('DOM Interaction', function () {
 });
 
 
+
+describe('Callbacks', function () {
+  beforeEach(function () {
+        var structure = createAudio("audio-test-wraper");
+        document.body.appendChild(structure);
+  });     
+  it('should fire onStore after Store', function(){
+    //should.equal(ms)
+  });
+  afterEach(function () {
+      var structure = document.getElementById('audio-test-wraper');
+      structure.parentNode.removeChild(structure);
+  });   
+});

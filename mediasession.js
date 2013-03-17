@@ -17,18 +17,17 @@ if (window.HTMLMediaElement && window.localStorage) {
 
       /* store the current location */
       this.store = function () {
-        
-        this.onStore();
+        this.session.onStore();         
       };
 
       /* retrieve the stored location */
       this.retrieve = function () {
-        this.onRetrieve();
+        this.session.onRetrieve();
       };
 
       /* clear the stored location */
       this.clear = function () {
-        this.onClear();
+        this.session.onClear();
       };
 
       this.addEventHandlers = function () {
