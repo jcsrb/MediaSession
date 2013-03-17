@@ -20,9 +20,9 @@ if (window.HTMLMediaElement && window.localStorage) {
         this.session.onStore();         
       };
 
-      /* retrieve the stored location */
-      this.retrieve = function () {
-        this.session.onRetrieve();
+      /* restore the stored location */
+      this.restore = function () {
+        this.session.onRestore();
       };
 
       /* clear the stored location */
@@ -31,14 +31,14 @@ if (window.HTMLMediaElement && window.localStorage) {
       };
 
       this.addEventHandlers = function () {
-        this.mediaElement.addEventListener('canplay', this.retrieve);
+        this.mediaElement.addEventListener('canplay', this.restore);
         this.mediaElement.addEventListener('timeupdate', this.store);
         this.mediaElement.addEventListener('seeked', this.store);
         this.mediaElement.addEventListener('ended', this.clear);
       };
 
       this.removeEventHandlers = function () {
-        this.mediaElement.removeEventListener('canplay', this.retrieve);
+        this.mediaElement.removeEventListener('canplay', this.restore);
         this.mediaElement.removeEventListener('timeupdate', this.storeSession);
         this.mediaElement.removeEventListener('seeked', this.storeSession);
         this.mediaElement.removeEventListener('ended', this.clearSession);
@@ -55,7 +55,7 @@ if (window.HTMLMediaElement && window.localStorage) {
     MediaSession.prototype = {
       /*Callbacks*/
       onStore : function () {}, /*noop*/
-      onRetrieve : function () {}, /*noop*/
+      onRestore : function () {}, /*noop*/
       onClear : function () {} /*noop*/
     };
     // expose it to the world

@@ -18,8 +18,8 @@ describe('MediaSession', function () {
       expect(mediaSession).to.respondTo('store');
     });    
 
-    it("should have a retrieve function", function() {      
-      expect(mediaSession).to.respondTo('retrieve');
+    it("should have a restore function", function() {      
+      expect(mediaSession).to.respondTo('restore');
     });
 
     it("should have a clear function", function() {      
