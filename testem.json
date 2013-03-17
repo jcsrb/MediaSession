@@ -1,11 +1,8 @@
 {
     "framework": "mocha",
     "src_files": [
-    	"mediasession.js",
-    	"tests/*"
-    ],
-    "launch_in_dev": [
-		"chrome",
-		"firefox"
-	]
+    	"mediasession.js",    	
+    	"tests/helpers/*",
+    	"tests/MediaSessionTest.js"
+    ]    
 }

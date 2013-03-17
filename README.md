@@ -1,6 +1,6 @@
-# AudioSession
+# MediaSession
 
-we all have been there: you are listening to a podcast on a website and you accidentally close the tab. You can reopen the tab, but if you didn't pay close attention to the timer, finding the right place again can be tricky. __AudioSession__ is here to fix just that!
+we all have been there: you are listening to a podcast on a website and you accidentally close the tab. You can reopen the tab, but if you didn't pay close attention to the timer, finding the right place again can be tricky. __MediaSession__ is here to fix just that!
 
 ## What is it?
 AudioSession is an extension of the [HTMLAudioElement][HAEdoc] prototype that keeps track of __&lt;audio&gt;__  `currentTime` and saves it to __localStorage__ to be able to retrieve it on the next play, regardless of page reload. 
@@ -57,11 +57,14 @@ It's either a bug or a feature depends on how you see it.
 You can use this side effect to keep music continuing, when going to the next page.
 If you don't want this to happen, use a unique ID for each &lt;audio&gt; element, and a include it in the _sessionKey_.
 
+
+## Testing
+Local Test a done using
+Testem+Mocha+Chai and Dom-Builder 
+Remote testing is done using Testling-CI
+
 ## Further Plans
-* check compatibility with popular polyfills
-* add tests
-* annotate source
-* apply functions to HTMLMediaElement therefore supporting both Audio and Video(?)
+
 
 
 ## Thanks to

@@ -17,6 +17,7 @@ if (window.HTMLMediaElement && window.localStorage) {
 
       /* store the current location */
       this.store = function () {
+        
         this.onStore();
       };
 

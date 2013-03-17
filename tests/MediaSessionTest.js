@@ -52,3 +52,28 @@ describe('MediaSession', function () {
 });
 
 
+
+
+function createAudioElement(singleSource){
+
+}
+
+describe('DOM Interaction', function () {
+  describe('Audio', function () {    
+      beforeEach(function () {
+        var structure = createAudio("audio-test-wraper");
+        document.body.appendChild(structure);
+      });        
+
+      it('should do what...', function(){
+        
+      });
+
+      afterEach(function () {
+        var structure = document.getElementById('audio-test-wraper');
+        structure.parentNode.removeChild(structure);
+      }); 
+  });  
+});
+
+
