@@ -4,7 +4,7 @@
 MediaSession saves the time-location of MediaElements (&lt;audio&gt; & &lt;video&gt;) and gives you the ability to restore it.
 
 ## Browser Support
-MediaSession relies on **HTMLMediaElement** ([like Audio][canIuseAudio]) and [*localStorage*][canIuseStorage], only browsers that implement these specs are supported
+MediaSession relies on **HTMLMediaElement** ([like Audio][canIuseAudio]) and [*localStorage*][canIuseStorage], only browsers that implement these specs are supported.
 
 [![browser support](http://ci.testling.com/jcsrb/mocha-testling-ci-example.png)](http://ci.testling.com/jcsrb/mocha-testling-ci-example)
 
@@ -12,7 +12,7 @@ MediaSession relies on **HTMLMediaElement** ([like Audio][canIuseAudio]) and [*l
 
 you can use this automatically or manually depending  on your needs:
 
-### Automatic activation
+### with Element Attributes 
 add `session` to your `<audio>` element like this:
 
 ```html
@@ -21,33 +21,47 @@ add `session` to your `<audio>` element like this:
       <source src="source.ogg" type="audio/ogg" />
 </audio>
 ```
+for automatic restore also add `autorestore` to your `<audio>` element like this:
 
-### JavaScript
+```html
+<audio controls session autorestore>
+      <source src="source.mp3" type="audio/mpeg" />
+      <source src="source.ogg" type="audio/ogg" />
+</audio>
+```
+
+### with JavaScript
 
 ```javascript
   var myAudioElement = document.getElementsByTagName("audio")[0]; // get your audio element
   new MediaSession(me); // create a new MediaSession and pass the element to the constructor
-  
-  // or  
-  var ms = new MediaSession();      // create a new MediaSession 
-  ms.attachElement(myAudioElement); // and attach it afterwards
 ```
+after initialization you can 
+
+```javascript
+	myAudioElement.session.restore(); // move to last saved position
+	myAudioElement.session.end(); // disable and remove the media session
+```
+
+
+
 ### Callbacks
 for better integration in your project, MediaSession provides a set of callbacks triggered at various points:
 
 * `onStore` is fired when the current position has been stored (fires often)
-* `onRetrieve` is fired when the stored position has been applied to the audio element
+* `onRestore` is fired when the stored position has been applied to the audio element
 * `onClear` is fired when the the session key has been removed from storage
+* `onEnd` is fired when the the session key has been removed from storage
 
 ```javascript
   var myAudioElement = document.getElementsByTagName("audio")[0]; // get your audio element  
-  myAudioElement.saveSession.onStore : function () { /* my callback */ }; 
-  myAudioElement.saveSession.onRetrieve : function () { /* my callback */ }; 
-  myAudioElement.saveSession.onClear : function () { /* my callback */ }; 
+  myAudioElement.session.onStore : function () { /* my callback */ }; 
+  myAudioElement.session.onRestore : function () { /* my callback */ }; 
+  myAudioElement.session.onClear : function () { /* my callback */ }; 
 ```
 ## Limitations
 
-### HTML 5 Validation
+### HTML5 Validation
 as described in the [Usage Section](#usage), MediaSession implicit activation relies on custom element attributes  (`session` and `autorestore`) and validators don't like that.
 
 If you insist on spotless validation, rename all instances to  the `data-` equivalent
@@ -60,11 +74,12 @@ The default Storage Key is build from the source URL of the file, this has the s
 ### Local
 Test a done using [Testem][testem] with a [Chai][chai] favoured cup of [Mocha][mocha] 
 ### Continuous Integration and Browser Support
-Remote testing is done using [Testling-CI][testling]
+Remote testing is done using [Testling-CI][testling], see an example on how to do this [here](https://github.com/jcsrb/mocha-testling-ci-example)
 
 ## Further Plans
 * Integrate with popular media polyfills
 * Bookmarklet
+*
 
 ## Thanks to
 * [Upfront Podcast][upfront] for the demo audio files
