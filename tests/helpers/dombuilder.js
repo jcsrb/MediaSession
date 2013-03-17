@@ -23,7 +23,7 @@
 
             content: function() {
                 var counter = 0,
-                    limit = arguments.length;                    
+                    limit = arguments.length;
 
                 while (counter < limit) {
                     if (typeof arguments[counter] == 'string') {
@@ -31,8 +31,6 @@
                     }
                     counter++;
                 }
-
-                console.log(this);
 
                 this.structure += '</' + this.storage.tags.pop() + '>'; // remove the last tag from the storage list and use it here
             },
