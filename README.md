@@ -1,84 +1,89 @@
 # MediaSession
 
-we all have been there: you are listening to a podcast on a website and you accidentally close the tab. You can reopen the tab, but if you didn't pay close attention to the timer, finding the right place again can be tricky. __MediaSession__ is here to fix just that!
-
 ## What is it?
-AudioSession is an extension of the [HTMLAudioElement][HAEdoc] prototype that keeps track of __&lt;audio&gt;__  `currentTime` and saves it to __localStorage__ to be able to retrieve it on the next play, regardless of page reload. 
-Works <del>great with autoplay</del> [`autoplay` doesn't work crossbrowser and is under investigation [#2](https://github.com/jcsrb/AudioSession/issues/2)]  and has no issues with `loop`
+MediaSession saves the time-location of MediaElements (&lt;audio&gt; & &lt;video&gt;) and gives you the ability to restore it.
 
+## Browser Support
+MediaSession relies on **HTMLMediaElement** ([like Audio][canIuseAudio]) and [*localStorage*][canIuseStorage], only browsers that implement these specs are supported
+
+[![browser support](http://ci.testling.com/jcsrb/mocha-testling-ci-example.png)](http://ci.testling.com/jcsrb/mocha-testling-ci-example)
 
 ## Usage
 
 you can use this automatically or manually depending  on your needs:
 
 ### Automatic activation
-add `save-session` to your `<audio>` element like this:
+add `session` to your `<audio>` element like this:
 
 ```html
-<audio controls save-session>
+<audio controls session>
       <source src="source.mp3" type="audio/mpeg" />
       <source src="source.ogg" type="audio/ogg" />
 </audio>
 ```
 
-### JavaScript activation
+### JavaScript
 
 ```javascript
   var myAudioElement = document.getElementsByTagName("audio")[0]; // get your audio element
-  myAudioElement.saveSession = true; // activate AudioSession
-  myAudioElement.saveSession = false; // deactivate AudioSession
+  new MediaSession(me); // create a new MediaSession and pass the element to the constructor
+  
+  // or  
+  var ms = new MediaSession();      // create a new MediaSession 
+  ms.attachElement(myAudioElement); // and attach it afterwards
 ```
-### Custom Events
-for better integration in your project, AudioSession provides a set of custom events triggered at various points:
+### Callbacks
+for better integration in your project, MediaSession provides a set of callbacks triggered at various points:
 
-* `sessionStored` is fired when the current position has been stored (fires often)
-* `sessionRestored` is fired when the stored position has been applied to the audio element
-* `sessionCleared` is fired when the the session key has been removed from storage
-* `sessionSaveActivated` is fired when AudioSession has been activated
-* `sessionSaveDeActivated` is fired when AudioSession has been deactivated
+* `onStore` is fired when the current position has been stored (fires often)
+* `onRetrieve` is fired when the stored position has been applied to the audio element
+* `onClear` is fired when the the session key has been removed from storage
 
-## Browser Support
-as AudioSession relies on [Audio][canIuseAudio] and [localStorage][canIuseStorage], only browsers that implement these specs are supported
-
-in development AudioSession has been tested on:
-* Chrome 25
-* Firefox 19
-
+```javascript
+  var myAudioElement = document.getElementsByTagName("audio")[0]; // get your audio element  
+  myAudioElement.saveSession.onStore : function () { /* my callback */ }; 
+  myAudioElement.saveSession.onRetrieve : function () { /* my callback */ }; 
+  myAudioElement.saveSession.onClear : function () { /* my callback */ }; 
+```
 ## Limitations
 
 ### HTML 5 Validation
-as described in the [Usage Section](#usage), AudioSession can be activated using the element property `save-session`.
-If you are keen on spotless validation, rename all instances of `save-session` to `data-save-session`
+as described in the [Usage Section](#usage), MediaSession implicit activation relies on custom element attributes  (`session` and `autorestore`) and validators don't like that.
 
-### Session Key
-The Session Key is build from the source URL of the file, this has the side effect that if you have the same audio file on multiple sub-pages it continues from where it left of.
+If you insist on spotless validation, rename all instances to  the `data-` equivalent
 
-It's either a bug or a feature depends on how you see it.
-You can use this side effect to keep music continuing, when going to the next page.
-If you don't want this to happen, use a unique ID for each &lt;audio&gt; element, and a include it in the _sessionKey_.
+### Storage Key
+The default Storage Key is build from the source URL of the file, this has the side effect that if you have the same audio file on multiple sub-pages it continues from where it left of.
 
 
 ## Testing
-Local Test a done using
-Testem+Mocha+Chai and Dom-Builder 
-Remote testing is done using Testling-CI
+### Local
+Test a done using [Testem][testem] with a [Chai][chai] favoured cup of [Mocha][mocha] 
+### Continuous Integration and Browser Support
+Remote testing is done using [Testling-CI][testling]
 
 ## Further Plans
-
-
+* Integrate with popular media polyfills
+* Bookmarklet
 
 ## Thanks to
 * [Upfront Podcast][upfront] for the demo audio files
 * [Ben][ben] and [Daryl][daryl] for input on JS Best Practices
+* [Mark McDonnell][integralist] for his [DOM-Builder][domb]
 
 ## License
-MIT, see the file for details
+MIT, see the [LICENSE](LICENSE) for details
 
 
 
-[HAEdoc]: https://developer.mozilla.org/en-US/docs/DOM/HTMLAudioElement
 [canIuseAudio]: http://caniuse.com/audio
 [canIuseStorage]: http://caniuse.com/namevalue-storage
 [upfront]: http://upfrontpodcast.com
 [ben]: https://github.com/benhowdle89
 [daryl]: https://github.com/daryl
+[integralist]: https://github.com/Integralist
+[domb]: https://github.com/Integralist/DOM-Builder
+[testem]: https://github.com/airportyh/testem
+[mocha]: http://visionmedia.github.com/mocha/
+[chai]: http://chaijs.com/
+[testling]: https://ci.testling.com/
