@@ -1,7 +1,7 @@
 var demoAudioSrc = [
   {
     src :"http://jakob.cosoroaba.ro/demofiles/audiodata/upfront-6.mp3",
-    mine:"audio/mpeg"
+    mime:"audio/mpeg"
   },
   {
     src  :"http://jakob.cosoroaba.ro/demofiles/audiodata/upfront-6.ogg",
