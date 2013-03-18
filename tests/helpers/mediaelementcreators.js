@@ -1,12 +1,13 @@
-function createVideo(wrapperId){
-  return createMedia(wrapperId, "video", demoVideoSrc);
+function createVideo(wrapperId, autorestore){
+  return createMedia(wrapperId, "video", demoVideoSrc, autorestore);
 }
 
-function createAudio(wrapperId){  
-  return createMedia(wrapperId, "audio", demoAudioSrc);
+function createAudio(wrapperId, autorestore){  
+  return createMedia(wrapperId, "audio", demoAudioSrc, autorestore);
 } 
 
-function createMedia(wrapperId, elementTagName, sources){
+function createMedia(wrapperId, elementTagName, sources, autorestore){
+  var autorestore = !!autorestore;
   
   var structure = DOM.init(
     DOM.el('div#'+wrapperId).content(
@@ -18,6 +19,9 @@ function createMedia(wrapperId, elementTagName, sources){
   var mediaElement = structure.querySelector(elementTagName);
   mediaElement.setAttribute("controls", '');
   mediaElement.setAttribute("session", '');
+  if(autorestore){
+    mediaElement.setAttribute("autorestore", '');
+  }
 
   var sourcesNodes = [];
   var count = sources.length;  
