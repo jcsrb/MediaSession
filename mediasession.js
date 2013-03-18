@@ -17,16 +17,23 @@ if (window.HTMLMediaElement && window.localStorage) {
 
       /* store the current location */
       this.store = function () {
-        this.session.onStore(); // execute callback
+        if (!this.paused) { // only when not paused
+          var sessionTime = this.currentTime; // get element time
+          localStorage.setItem(this.session.sessionKey, sessionTime);  //save it
+          this.session.onStore(); // execute callback
+        }        
       };
 
       /* restore the stored location */
       this.restore = function () {
+        var sessionTime = localStorage.getItem(this.session.sessionKey); // get stored time
+        this.currentTime = sessionTime || 0; // set it, fall back to 0
         this.session.onRestore(); // execute callback
       };
 
       /* clear the stored location */
       this.clear = function () {
+        localStorage.removeItem(this.session.sessionKey); //remove saved values from the localstorage
         this.session.onClear(); // execute callback
       };
 
