@@ -1,7 +1,7 @@
 # MediaSession
 
 ## What is it?
-MediaSession saves the time-location of MediaElements (&lt;audio&gt; & &lt;video&gt;) and gives you the ability to restore it.
+MediaSession saves the time-location of MediaElements (&lt;audio&gt; & &lt;video&gt;) and gives you the ability to restore it. MediaSession is JavaScript dependencies free.
 
 ## Browser Support
 MediaSession relies on **HTMLMediaElement** ([like Audio][canIuseAudio]) and [localStorage][canIuseStorage], only browsers that implement these specs are supported.
@@ -29,6 +29,24 @@ for automatic restore also add `autorestore` to your `<audio>` element like this
       <source src="source.ogg" type="audio/ogg" />
 </audio>
 ```
+and run it after the DOM has been build. By adding this just before the `</audio>`
+
+```html
+	<script type='text/javascript'>
+		MediaSession.autoApply();
+	</script>
+</body>
+```
+
+or if you using jQuery 
+
+```javascript
+$(document).ready(function() {
+  MediaSession.autoApply();
+});
+```
+
+
 
 ### with JavaScript
 
