@@ -5,10 +5,13 @@
     <title>Audio Session</title>
   </head>
   <body>
-    <audio controls session>
+    <audio controls session autorestore>
       <source src="http://jakob.cosoroaba.ro/demofiles/audiodata/upfront-6.mp3" type="audio/mpeg" />
       <source src="http://jakob.cosoroaba.ro/demofiles/audiodata/upfront-6.ogg" type="audio/ogg" />
     </audio>
     <script src="mediasession.js"></script>        
+    <script type='text/javascript'>
+      MediaSession.autoApply();
+    </script>
     </body>
 </html>
