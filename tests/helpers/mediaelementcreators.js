@@ -33,7 +33,7 @@ function createMedia(wrapperId, elementTagName, sources, autorestore){
   var sourceElements = structure.querySelectorAll("source");
   mapSources(sources,sourceElements);
 
-  console.log(mediaElement);
+  
   return structure; 
 }
 
