@@ -76,11 +76,13 @@ if (window.HTMLMediaElement && window.localStorage) {
     };
 
     MediaSession.autoApply = function () {
-      var mediaElements = document.querySelectorAll("audio, video"),
+      var mediaElements = document.querySelectorAll("audio, video"), //get all MediaElements
         mediaElementsCount = mediaElements.length;
       while (mediaElementsCount > 0) {
         mediaElementsCount -= 1;
-        new MediaSession(mediaElements[mediaElementsCount]);
+        if (mediaElements[mediaElementsCount].hasAttribute("session")) {
+          new MediaSession(mediaElements[mediaElementsCount]); // intialize them all
+        }
       }
     };
     // expose it to the world
