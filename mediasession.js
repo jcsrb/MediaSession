@@ -21,7 +21,7 @@ if (window.HTMLMediaElement && window.localStorage) {
           var sessionTime = this.currentTime; // get element time
           localStorage.setItem(this.session.sessionKey, sessionTime);  //save it
           this.session.onStore(); // execute callback
-        }        
+        }
       };
 
       /* restore the stored location */
@@ -50,7 +50,9 @@ if (window.HTMLMediaElement && window.localStorage) {
           this.mediaElement.addEventListener('canplay', this.restore);
         }
         this.mediaElement.addEventListener('timeupdate', this.store);
-        this.mediaElement.addEventListener('ended', this.end);
+        if (this.mediaElement.hasAttribute("loop")) { //
+          this.mediaElement.addEventListener('ended', this.end);
+        }
       };
 
       this.removeEventHandlers = function () {
@@ -59,13 +61,11 @@ if (window.HTMLMediaElement && window.localStorage) {
         this.mediaElement.removeEventListener('ended', this.end);
       };
 
-
       //attachElement if mediaElement is available from the constructor
       if (!!mediaElement) {
         this.attachElement(mediaElement);
       }
     }
-
 
     MediaSession.prototype = {
       /*Callbacks*/
@@ -73,6 +73,15 @@ if (window.HTMLMediaElement && window.localStorage) {
       onRestore : function () {}, /*noop*/
       onClear : function () {}, /*noop*/
       onEnd : function () {} /*noop*/
+    };
+
+    MediaSession.autoApply = function () {
+      var mediaElements = document.querySelectorAll("audio, video"),
+        mediaElementsCount = mediaElements.length;
+      while (mediaElementsCount > 0) {
+        mediaElementsCount -= 1;
+        new MediaSession(mediaElements[mediaElementsCount]);
+      }
     };
     // expose it to the world
     return MediaSession;
