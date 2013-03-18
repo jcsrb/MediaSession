@@ -70,6 +70,21 @@ describe('DOM Interaction', function () {
         structure.parentNode.removeChild(structure);
       }); 
   });  
+  describe('Video', function () {    
+      beforeEach(function () {
+        var structure = createVideo("video-test-wraper");
+        document.body.appendChild(structure);
+      });        
+
+      it('should do what...', function(){
+        
+      });
+
+      afterEach(function () {
+        var structure = document.getElementById('video-test-wraper');
+        structure.parentNode.removeChild(structure);
+      }); 
+  });  
 });
 
 
