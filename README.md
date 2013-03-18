@@ -6,11 +6,11 @@ MediaSession saves the time-location of MediaElements (&lt;audio&gt; & &lt;video
 ## Browser Support
 MediaSession relies on **HTMLMediaElement** ([like Audio][canIuseAudio]) and [localStorage][canIuseStorage], only browsers that implement these specs are supported.
 
-[![browser support](http://ci.testling.com/jcsrb/mocha-testling-ci-example.png)](http://ci.testling.com/jcsrb/mocha-testling-ci-example)
+[![browser support](http://ci.testling.com/jcsrb/MediaSession.png)](http://ci.testling.com/jcsrb/MediaSession)
 
 ## Usage
 
-you can use this automatically or manually depending  on your needs:
+depending on your needs:
 
 ### with Element Attributes 
 add `session` to your `<audio>` element like this:
