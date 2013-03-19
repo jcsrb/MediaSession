@@ -95,6 +95,7 @@ Remote testing is done using [Testling-CI][testling], see an example on how to d
 ## Further Plans
 * Integrate with popular media polyfills
 * Bookmarklet
+* Customizable SessionKey
 * Nice Demo and GH-Page
 
 ## Thanks to
