@@ -87,7 +87,7 @@ The default Storage Key is build from the source URL of the file, this has the s
 
 
 ## Testing
-### Local
+### Local Testing
 Test a done using [Testem][testem] with a [Chai][chai] favoured cup of [Mocha][mocha] 
 ### Continuous Integration and Browser Support
 Remote testing is done using [Testling-CI][testling], see an example on how to do this [here](https://github.com/jcsrb/mocha-testling-ci-example)
