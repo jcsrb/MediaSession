@@ -29,7 +29,9 @@ for automatic restore also add `autorestore` to your `<audio>` element like this
       <source src="source.ogg" type="audio/ogg" />
 </audio>
 ```
-and run it after the DOM has been build. By adding this just before the `</audio>`
+and run this after the MediaElements are in the DOM.
+
+by adding this just before `</body>`
 
 ```html
 	<script type='text/javascript'>
@@ -37,7 +39,6 @@ and run it after the DOM has been build. By adding this just before the `</audio
 	</script>
 </body>
 ```
-
 or if you using jQuery 
 
 ```javascript
@@ -45,8 +46,6 @@ $(document).ready(function() {
   MediaSession.autoApply();
 });
 ```
-
-
 
 ### with JavaScript
 
