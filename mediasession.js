@@ -53,7 +53,7 @@ if (window.HTMLMediaElement && window.localStorage) {
           this.mediaElement.addEventListener('canplay', this.restore);
         }
         this.mediaElement.addEventListener('timeupdate', this.store);
-        if (this.mediaElement.hasAttribute("loop")) { //
+        if (!this.mediaElement.hasAttribute("loop")) { //
           this.mediaElement.addEventListener('ended', this.end);
         }
       };
