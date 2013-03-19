@@ -13,9 +13,12 @@ if (window.HTMLMediaElement && window.localStorage) {
           throw new Error('MediaSession requires a Audio or Video DOM Node to be passed in here');
         }
         this.mediaElement = mediaElement; // build reference
-        this.mediaElement.session = this; // build reverse reference        
-        this.sessionKey = name + "-" + this.mediaElement.currentSrc; // build sessionKey 
+        this.mediaElement.session = this; // build reverse reference                
         this.addEventHandlers(); // attach handelers
+      };
+
+      this.buildSessionKey = function () {
+        this.session.sessionKey = MediaSession.name + "-" + this.currentSrc; // build sessionKey 
       };
 
       /* store the current location */
@@ -49,6 +52,7 @@ if (window.HTMLMediaElement && window.localStorage) {
       };
 
       this.addEventHandlers = function () {
+        this.mediaElement.addEventListener('loadstart', this.buildSessionKey);
         if (this.mediaElement.hasAttribute("autorestore")) {
           this.mediaElement.addEventListener('canplay', this.restore);
         }
@@ -59,6 +63,7 @@ if (window.HTMLMediaElement && window.localStorage) {
       };
 
       this.removeEventHandlers = function () {
+        this.mediaElement.removeEventListener('loadstart', this.buildSessionKey);
         this.mediaElement.removeEventListener('canplay', this.restore);
         this.mediaElement.removeEventListener('timeupdate', this.store);
         this.mediaElement.removeEventListener('ended', this.end);
