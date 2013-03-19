@@ -13,7 +13,7 @@ if (window.HTMLMediaElement && window.localStorage) {
           throw new Error('MediaSession requires a Audio or Video DOM Node to be passed in here');
         }
         this.mediaElement = mediaElement; // build reference
-        this.mediaElement.session = this; // build reverse reference
+        this.mediaElement.session = this; // build reverse reference        
         this.sessionKey = name + "-" + this.mediaElement.currentSrc; // build sessionKey 
         this.addEventHandlers(); // attach handelers
       };
@@ -44,7 +44,7 @@ if (window.HTMLMediaElement && window.localStorage) {
       this.end = function () {
         this.session.removeEventHandlers(); // remove handlers
         this.session.clear(); // clear session
-        this.session = undefined; // remove referece and let GC do it's thing
+        this.session = undefined; // remove reference and let GC do it's thing
         this.session.onEnd(); // execute callback
       };
 
