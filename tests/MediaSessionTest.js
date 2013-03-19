@@ -53,11 +53,13 @@ describe("Initalization", function() {
     expect(me.session).to.not.exist;    
   });
 
-  it('should build a sessionKey', function(){
+  it('should build a sessionKey', function(done){
     MediaSession.autoApply();
     var me = document.querySelector('audio');            
-    console.log(me.currentSrc);
-    expect(me.session.sessionKey).to.contain(me.currentSrc);
+    me.addEventListener('loadstart', function(){      
+      expect(me.session.sessionKey).to.contain(me.currentSrc);
+      done();
+    });       
   });
   
 });
@@ -96,19 +98,50 @@ describe('Events', function () {
 });
 
 describe('Callbacks', function () {
+  this.timeout(5000);
   beforeEach(function () {
     var structure = createAudio("audio-test-wraper");
-    document.body.appendChild(structure);
+    document.body.appendChild(structure);    
   });   
   afterEach(function () {
     var structure = document.getElementById('audio-test-wraper');
     structure.parentNode.removeChild(structure);
   });   
 
-  it('should fire onStore after Store');
-  it('should fire onRestore after restore');
-  it('should fire onClear after clear');
-  it('should fire onEnd after end');
+  it('should fire onStore after Store', function(done){              
+    MediaSession.autoApply();
+    var me = document.querySelector('audio');               
+    me.session.onStore = done;          
+    me.setAttribute('autoplay','');
+  });
+
+  it('should fire onRestore after restore',function(done){    
+    var me = document.querySelector('audio');                   
+    MediaSession.autoApply();    
+    me.session.onRestore = done;
+    me.addEventListener("loadedmetadata", function(){
+      me.session.restore();
+    })
+  });
+  it('should fire onClear after clear',function(done){      
+    var me = document.querySelector('audio');                   
+    MediaSession.autoApply();        
+    me.session.onClear = done;
+    me.addEventListener("loadedmetadata", function(){
+      me.session.clear();
+    });
+  });
+
+  it('should fire onEnd after end', function(done){
+    var me = document.querySelector('audio');                   
+    MediaSession.autoApply();        
+    me.session.onEnd = done;    
+    me.addEventListener("loadedmetadata", function(){
+      me.currentTime = me.duration-0.1;      
+    })
+    me.setAttribute('autoplay','');
+
+  });
 
   
 });

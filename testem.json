@@ -1,5 +1,5 @@
 {
-    "framework": "mocha",
+    "framework": "mocha",    
     "src_files": [
     	"mediasession.js",    	
     	"tests/helpers/*",

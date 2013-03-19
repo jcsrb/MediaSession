@@ -26,7 +26,7 @@ function createMedia(wrapperId, elementTagName, sources, autorestore) {
     sourcesNodes = [],
     count = sources.length;
   mediaElement.setAttribute("controls", '');
-  mediaElement.setAttribute("session", '');
+  mediaElement.setAttribute("session", '');  
 
   if (autorestore) {
     mediaElement.setAttribute("autorestore", '');
