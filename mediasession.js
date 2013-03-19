@@ -9,6 +9,9 @@ if (window.HTMLMediaElement && window.localStorage) {
     function MediaSession(mediaElement) {
 
       this.attachElement = function (mediaElement) {
+        if (mediaElement.tagName.toLowerCase() !== "audio" && mediaElement.tagName.toLowerCase() !== "video") {
+          throw new Error('MediaSession requires a Audio or Video DOM Node to be passed in here');
+        }
         this.mediaElement = mediaElement; // build reference
         this.mediaElement.session = this; // build reverse reference
         this.sessionKey = name + "-" + this.mediaElement.currentSrc; // build sessionKey 
