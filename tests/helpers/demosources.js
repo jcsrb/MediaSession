@@ -11,17 +11,18 @@ var demoAudioSrc = [
 
 var demoVideoSrc = [
   {
-    src  : "http://easyhtml5video.com/images/happyfit2.mp4",
+    src  : "http://vid.ly/5u4h3e?content=video&format=mp4",
     mime : "video/mp4"
   },
   {
-    src : "http://easyhtml5video.com/images/happyfit2.webm",
+    src : "http://vid.ly/5u4h3e?content=video&format=webm",
     mime: "video/webm"
   }, 
   {
-    src  :"http://easyhtml5video.com/images/happyfit2.ogv",
+    src  :"http://vid.ly/5u4h3e?content=video&format=ogg",
     mime :"video/ogg"
   }
 ];
+
 
 

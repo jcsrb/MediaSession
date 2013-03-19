@@ -22,33 +22,37 @@ if (window.HTMLMediaElement && window.localStorage) {
       };
 
       /* store the current location */
-      this.store = function () {
+      this.store = function () {       
+        var session = this.session || this; 
         if (!this.paused) { // only when not paused
-          var sessionTime = this.currentTime; // get element time
-          localStorage.setItem(this.session.sessionKey, sessionTime);  //save it
-          this.session.onStore(); // execute callback
+          var sessionTime = session.mediaElement.currentTime; // get element time
+          localStorage.setItem(session.sessionKey, sessionTime);  //save it
+          session.onStore(); // execute callback
         }
       };
 
       /* restore the stored location */
       this.restore = function () {
-        var sessionTime = localStorage.getItem(this.session.sessionKey); // get stored time
-        this.currentTime = sessionTime || 0; // set it, fall back to 0
-        this.session.onRestore(); // execute callback
+        var session = this.session || this;
+        var sessionTime = localStorage.getItem(session.sessionKey); // get stored time
+        session.mediaElement.currentTime = sessionTime || 0; // set it, fall back to 0
+        session.onRestore(); // execute callback
       };
 
       /* clear the stored location */
       this.clear = function () {
-        localStorage.removeItem(this.session.sessionKey); //remove saved values from the localstorage
-        this.session.onClear(); // execute callback
+        var session = this.session || this;
+        localStorage.removeItem(session.sessionKey); //remove saved values from the localstorage
+        session.onClear(); // execute callback
       };
 
       /* end session */
       this.end = function () {
-        this.session.removeEventHandlers(); // remove handlers
-        this.session.clear(); // clear session
-        this.session = undefined; // remove reference and let GC do it's thing
-        this.session.onEnd(); // execute callback
+        var session = this.session || this;
+        session.removeEventHandlers(); // remove handlers
+        session.clear(); // clear session
+        session.onEnd(); // execute callback
+        session = undefined; // remove reference and let GC do it's thing        
       };
 
       this.addEventHandlers = function () {
